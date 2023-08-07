@@ -9,5 +9,5 @@ public interface IProductRepo {
     public Product getProductById(String id);
     public Product update(Product product);
     public List<Product> getAllProducts();
-    List<Product> getAllAvailableProducts()
+    List<Product> getAllAvailableProducts();
 }
