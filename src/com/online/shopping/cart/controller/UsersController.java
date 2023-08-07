@@ -1,7 +1,9 @@
 package com.online.shopping.cart.controller;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
+import com.online.shopping.cart.dtos.request.UserLoginRequest;
 import com.online.shopping.cart.dtos.response.UserCreateResponseDTO;
+import com.online.shopping.cart.dtos.response.UserLoginResponseDTO;
 import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.mappers.UserMapper;
 import com.online.shopping.cart.services.UserService;
@@ -34,6 +36,21 @@ public class UsersController {
             return new ResponseEntity<>(runtimeException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    // Login // logout
+    // Login
+    /**
+     * Login API to login and generate a session id
+     * @param request
+     * @return
+     */
+    @PostMapping(value = "/login")
+    public ResponseEntity login(@RequestBody UserLoginRequest request) {
+        try {
+            UserLoginResponseDTO loginResponse = userService.login(request);
+            return new ResponseEntity(loginResponse, HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    // logout
 
 }

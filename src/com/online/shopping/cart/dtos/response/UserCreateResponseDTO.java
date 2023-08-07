@@ -7,7 +7,5 @@ import lombok.Builder;
 public class UserCreateResponseDTO {
     private String UserID;
     private String name;
-
     private UserRole userRole;
-
 }

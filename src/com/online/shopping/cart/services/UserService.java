@@ -1,14 +1,21 @@
 package com.online.shopping.cart.services;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
+import com.online.shopping.cart.dtos.request.UserLoginRequest;
+import com.online.shopping.cart.dtos.response.UserLoginResponseDTO;
 import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.enums.AccountStatus;
 import com.online.shopping.cart.mappers.UserMapper;
+import com.online.shopping.cart.repositories.SessionRepo;
 import com.online.shopping.cart.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private SessionRepo sessionRepo;
 
     UserRepository userRepository;
 
@@ -24,5 +31,14 @@ public class UserService {
     }
 
 
+    public UserLoginResponseDTO login(UserLoginRequest request) {
+        // call session controller to set the session
 
+        return null;
+    }
+
+    public UserLoginResponseDTO logout(UserLoginRequest request) {
+        // remove the session
+        return null;
+    }
 }
