@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface IUserRepo {
     User findById(String userId);
-    void addUser(User user);
-    void removeUser(User user);
+    User addUser(User user);
     public User update(User entity);
     public List<User> getAllUsers();
     User findUserByUsername(String username);

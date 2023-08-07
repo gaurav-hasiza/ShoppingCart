@@ -2,6 +2,7 @@ package com.online.shopping.cart.entity;
 
 import com.online.shopping.cart.enums.AccountStatus;
 import com.online.shopping.cart.enums.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,10 +10,12 @@ import lombok.Data;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class User extends BaseEntity{
     private String name;
-    private UserRole role;
+    private UserRole userRole;
     private AccountStatus accountStatus;
     private String password;
-    private String isActive;
+    private boolean isActive;
+
 }

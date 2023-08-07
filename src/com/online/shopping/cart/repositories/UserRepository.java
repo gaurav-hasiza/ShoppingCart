@@ -1,12 +1,16 @@
 package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.User;
+import com.online.shopping.cart.enums.AccountStatus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class UserRepository implements IUserRepo {
     private List<User> users;
+    HashMap<String,User> idUsersMapping;
 
     public UserRepository() {
         users = new ArrayList<>();
@@ -14,20 +18,38 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public User findById(String userId) {
-        return null;
+        if (idUsersMapping.containsKey(userId)) {
+            return idUsersMapping.get(userId);
+        }
+        throw new IllegalArgumentException("User Not Found");
     }
 
     // Method to add a user to the repository
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
+        user.setId(generateUserId());
         users.add(user);
+        idUsersMapping.put(user.getId(), user);
+        return user;
+    }
+    private String generateUserId() {
+        return UUID.randomUUID().toString();
+    }
+
+    public void suspend(String userId){
+        if (idUsersMapping.containsKey(userId)) {
+            User user = idUsersMapping.get(userId);
+
+            user.setAccountStatus(AccountStatus.SUSPENDED);
+        }
+        throw new IllegalArgumentException("User Not found");
     }
 
     // Method to remove a user from the repository
-    @Override
-    public void removeUser(User user) {
-        users.remove(user);
-    }
+//    @Override
+//    public void removeUser(User user) {
+//        users.remove(user);
+//    }
 
     @Override
     public User update(User entity) {
