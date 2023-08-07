@@ -1,7 +1,5 @@
 package com.online.shopping.cart.repositories;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.online.shopping.cart.entity.SessionData;
 import com.online.shopping.cart.entity.User;
 
@@ -11,11 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class SessionRepo {
-    private Map<String, SessionData> activeSessions;
-
-    public SessionRepo() {
-        activeSessions = new HashMap<>();
-    }
+    private final static Map<String, SessionData> activeSessions = new HashMap<>();
 
     public String createSession(User user, Instant expirationTime) {
         String sessionId = generateSessionId();

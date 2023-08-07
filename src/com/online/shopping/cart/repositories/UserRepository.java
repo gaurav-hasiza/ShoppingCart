@@ -9,12 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserRepository implements IUserRepo {
-    private List<User> users;
-    HashMap<String,User> idUsersMapping;
-
-    public UserRepository() {
-        users = new ArrayList<>();
-    }
+    private static final HashMap<String,User> idUsersMapping = new HashMap<>();
 
     @Override
     public User findById(String userId) {
@@ -28,7 +23,6 @@ public class UserRepository implements IUserRepo {
     @Override
     public User addUser(User user) {
         user.setId(generateUserId());
-        users.add(user);
         idUsersMapping.put(user.getId(), user);
         return user;
     }
@@ -45,12 +39,6 @@ public class UserRepository implements IUserRepo {
         throw new IllegalArgumentException("User Not found");
     }
 
-    // Method to remove a user from the repository
-//    @Override
-//    public void removeUser(User user) {
-//        users.remove(user);
-//    }
-
     @Override
     public User update(User entity) {
         return null;
@@ -58,7 +46,7 @@ public class UserRepository implements IUserRepo {
 
     // Method to find a user by username
     public User findUserByUsername(String username) {
-        for (User user : users) {
+        for (User user : idUsersMapping.values()) {
             if (user.getName().equals(username)) {
                 return user;
             }
@@ -69,7 +57,7 @@ public class UserRepository implements IUserRepo {
     // Method to get all users (for demonstration purposes)
     @Override
     public List<User> getAllUsers() {
-        return new ArrayList<>(users);
+        return new ArrayList<>(idUsersMapping.values());
     }
 }
 

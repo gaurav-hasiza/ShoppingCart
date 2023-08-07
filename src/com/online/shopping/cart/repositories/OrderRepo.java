@@ -10,11 +10,7 @@ import java.util.UUID;
 
 //TODO: Add validator layer
 public class OrderRepo implements IOrderRepo{
-    private final List<Order> orders;
-
-    public OrderRepo() {
-        this.orders = new ArrayList<>();
-    }
+    private static final List<Order> orders = new ArrayList<>();
 
     public void placeOrder(String userId, double totalAmount) {
         String orderId = generateOrderId();

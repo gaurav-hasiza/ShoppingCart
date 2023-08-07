@@ -5,11 +5,7 @@ import com.online.shopping.cart.entity.Product;
 import java.util.*;
 
 public class ProductRepo implements IProductRepo {
-    private static List<Product> productList = new ArrayList<>();
-    private Map<String, Product> products;
-    public ProductRepo() {
-        products = new HashMap<>();
-    }
+    private static final Map<String, Product> products = new HashMap<>();
     @Override
     public Product addProduct(Product product) {
         product.setId(generateSessionId());
@@ -17,7 +13,6 @@ public class ProductRepo implements IProductRepo {
         return product;
     }
     private String generateSessionId() {
-        // You can implement a more sophisticated session ID generation mechanism here
         return UUID.randomUUID().toString();
     }
 

@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShoppingCartRepo {
-    private Map<String, List<CartItem>> cartItemsByUserId;
-
-    public ShoppingCartRepo() {
-//        cartItemsByUserId = new HashMap<>();
-    }
+    private static final Map<String, List<CartItem>> cartItemsByUserId = new HashMap<>();
 
     public List<CartItem> getCartItemsForUser(String userId) {
         return cartItemsByUserId.getOrDefault(userId, new ArrayList<>());
