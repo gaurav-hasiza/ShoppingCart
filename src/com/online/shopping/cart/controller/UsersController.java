@@ -2,6 +2,8 @@ package com.online.shopping.cart.controller;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
 import com.online.shopping.cart.dtos.response.UserCreateResponseDTO;
+import com.online.shopping.cart.entity.User;
+import com.online.shopping.cart.mappers.UserMapper;
 import com.online.shopping.cart.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,20 +24,14 @@ public class UsersController {
     }
 
     @PostMapping("/createUser")
-    public ResponseEntity<UserCreateResponseDTO> createUser(@RequestBody UserCreateRequestDTO createUserRequest) {
-        userService.createUser(createUserRequest);
-        user.setRole(Role.USER); // Set the default role to USER for new users
-        User createdUser = userService.createUser(createUserRequest);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    }
-
-    @PostMapping
-    public ResponseEntity create(@RequestBody CreateOrUpdateUserRequest createOrUpdateUserRequest) {
+    public ResponseEntity<String> createUser(@RequestBody UserCreateRequestDTO createUserRequest) {
         try {
-            CreateUserResponse userResponse = userService.create(createOrUpdateUserRequest);
-            return new ResponseEntity(userResponse, HttpStatus.CREATED);
-        } catch (CartServiceException cse) {
-            return new ResponseEntity(cse.getMessage(), cse.getHttpStatus());
+            User createdUser = userService.createUser(createUserRequest);
+            UserCreateResponseDTO response = UserMapper.mapTOUserCreateResponse(createdUser);
+            return new ResponseEntity<>(response.toString(), HttpStatus.OK);
+        }
+        catch (RuntimeException runtimeException){
+            return new ResponseEntity<>(runtimeException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

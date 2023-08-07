@@ -12,7 +12,7 @@ public class UserService {
 
     UserRepository userRepository;
 
-    User createUser(UserCreateRequestDTO userCreateRequestDTO) {
+    public User createUser(UserCreateRequestDTO userCreateRequestDTO) {
          User user = UserMapper.mapToUser(userCreateRequestDTO);
          user.setAccountStatus(AccountStatus.ACTIVE);
          user.setActive(true);

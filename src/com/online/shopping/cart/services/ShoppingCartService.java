@@ -17,10 +17,12 @@ public class ShoppingCartService {
     }
 
     public void addToCart(String userId, CartItem cartItem) {
+        // add validation if that variation item is already present or not
         shoppingCartRepository.addToCart(userId, cartItem);
     }
 
     public void removeFromCart(String userId, CartItem cartItem) {
+        // add logic to remove some quantity of items.
         shoppingCartRepository.removeFromCart(userId, cartItem);
     }
 
