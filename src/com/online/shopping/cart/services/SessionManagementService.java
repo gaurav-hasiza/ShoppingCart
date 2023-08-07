@@ -6,8 +6,6 @@ import com.online.shopping.cart.repositories.SessionRepo;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -32,7 +30,8 @@ public class SessionManagementService {
         if (sessionData != null && !isSessionExpired(sessionData)) {
             return sessionData.getUser();
         }
-        return null;
+        throw new RuntimeException("Invalid Session");
+//        return null;
     }
 
     private boolean isSessionExpired(SessionData sessionData) {

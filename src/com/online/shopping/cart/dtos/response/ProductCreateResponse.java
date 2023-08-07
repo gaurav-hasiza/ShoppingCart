@@ -1,21 +1,15 @@
-package com.online.shopping.cart.entity;
-
+package com.online.shopping.cart.dtos.response;
 
 import com.online.shopping.cart.enums.ProductStatus;
 import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
 
-@Data
-@ToString(callSuper = true)
 @Builder
 public
-class Product extends BaseEntity{
+class ProductCreateResponse {
+    private String id;
     private String name;
     private String Description;
-//    private List<ProductVariation> productVariationList;
     private ProductStatus status;
-//    private String sellerId;
     private double price;
     private int stockQuantity;
 }

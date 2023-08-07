@@ -7,7 +7,6 @@ public
 class ProductVariation  extends BaseEntity{
     private String productId;
     private String sellerId;
-    private String attributes; // e.g., color, size
     private double price;
     private int stockQuantity;
     public ProductVariation(String productId, String sellerId, String variationId , double price, int quantity) {
