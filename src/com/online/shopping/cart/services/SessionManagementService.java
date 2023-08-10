@@ -23,7 +23,11 @@ public class SessionManagementService {
         return sessionId;
     }
 
-    public void validateSession(SessionData session) {
+    public void validateSession(String sessionID) {
+        SessionData session = sessionRepo.getSessionData(sessionID);
+        if (session == null){
+            throw new RuntimeException("Invalid Session ID");
+        }
         if (session.getExpirationTime().isBefore(Instant.from(LocalDateTime.now()))) {
             throw new RuntimeException("Session Not active");
         }

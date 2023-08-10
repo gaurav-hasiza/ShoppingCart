@@ -46,6 +46,7 @@ public class ShoppingCartController {
     public ResponseEntity removeProduct(@RequestHeader("Cookie") String cookieHeader,
                                         @RequestBody ShoppingCartRemoveFromCartRequest shoppingCartRemoveFromCartRequest) {
         try {
+            sessionManagementService.validateSession(cookieHeader);
             User currentUser = sessionManagementService.getUserBySessionId(cookieHeader);
             CartItem cartItem = ShoppingCartMapper.mapToCartItem(shoppingCartRemoveFromCartRequest);
             shoppingCartService.removeFromCart(currentUser.getId(), cartItem);
