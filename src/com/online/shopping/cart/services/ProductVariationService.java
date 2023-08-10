@@ -2,9 +2,11 @@ package com.online.shopping.cart.services;
 
 import com.online.shopping.cart.entity.ProductVariation;
 import com.online.shopping.cart.repositories.ProductVariationRepo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductVariationService {
     private ProductVariationRepo productVariationRepository;
 

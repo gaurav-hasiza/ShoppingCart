@@ -2,12 +2,14 @@ package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.enums.AccountStatus;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class UserRepository implements IUserRepo {
     private static final HashMap<String,User> idUsersMapping = new HashMap<>();
 

@@ -9,10 +9,10 @@ import com.online.shopping.cart.services.SessionManagementService;
 import com.online.shopping.cart.services.ShoppingCartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/v0/shopping")
 public class ShoppingCartController {
 
     ShoppingCartService shoppingCartService;

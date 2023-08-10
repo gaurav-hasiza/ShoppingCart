@@ -1,6 +1,7 @@
 package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.ProductVariation;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 // Not in use. Added this for more functionality
+@Component
 public class ProductVariationRepo {
     private Map<String, List<ProductVariation>> productVariationsByProductId;
 

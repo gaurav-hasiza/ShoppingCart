@@ -1,9 +1,11 @@
 package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.Product;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class ProductRepo implements IProductRepo {
     private static final Map<String, Product> products = new HashMap<>();
     @Override

@@ -1,8 +1,11 @@
 package com.online.shopping.cart.dtos.response;
 
-import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
+@Builder
+@Data
 public class UserLoginResponseDTO {
-    String sessionId;
-    LocalDateTime expiryTime;
+    private String sessionId;
+//    LocalDateTime expiryTime;
 }

@@ -2,6 +2,7 @@ package com.online.shopping.cart.services;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
 import com.online.shopping.cart.dtos.request.UserLoginRequest;
+import com.online.shopping.cart.dtos.request.UserLogoutRequestDTO;
 import com.online.shopping.cart.dtos.response.UserLoginResponseDTO;
 import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.enums.AccountStatus;
@@ -16,8 +17,10 @@ public class UserService {
 
     @Autowired
     private SessionRepo sessionRepo;
-
+    @Autowired
     UserRepository userRepository;
+    @Autowired
+    SessionManagementService sessionManagementService;
 
     public User createUser(UserCreateRequestDTO userCreateRequestDTO) {
          User user = UserMapper.mapToUser(userCreateRequestDTO);
@@ -32,13 +35,18 @@ public class UserService {
 
 
     public UserLoginResponseDTO login(UserLoginRequest request) {
-        // call session controller to set the session
+        // call session controller to set the session`
+        User user = userRepository.findById(request.getId());
+        String sessionId = null;
+        if (user.getPassword().equals(request.getPassword())){
+            sessionId = sessionManagementService.createSession(user);
+        }
 
-        return null;
+        return UserLoginResponseDTO.builder().sessionId(sessionId).build();
     }
 
-    public UserLoginResponseDTO logout(UserLoginRequest request) {
+    public void logout(UserLogoutRequestDTO request) {
         // remove the session
-        return null;
+        sessionRepo.removeSession(request.getSessionId());
     }
 }

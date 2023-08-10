@@ -2,6 +2,7 @@ package com.online.shopping.cart.controller;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
 import com.online.shopping.cart.dtos.request.UserLoginRequest;
+import com.online.shopping.cart.dtos.request.UserLogoutRequestDTO;
 import com.online.shopping.cart.dtos.response.UserCreateResponseDTO;
 import com.online.shopping.cart.dtos.response.UserLoginResponseDTO;
 import com.online.shopping.cart.entity.User;
@@ -26,11 +27,11 @@ public class UsersController {
     }
 
     @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@RequestBody UserCreateRequestDTO createUserRequest) {
+    public ResponseEntity createUser(@RequestBody UserCreateRequestDTO createUserRequest) {
         try {
             User createdUser = userService.createUser(createUserRequest);
             UserCreateResponseDTO response = UserMapper.mapTOUserCreateResponse(createdUser);
-            return new ResponseEntity<>(response.toString(), HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (RuntimeException runtimeException){
             return new ResponseEntity<>(runtimeException.getMessage(), HttpStatus.BAD_REQUEST);
@@ -46,11 +47,21 @@ public class UsersController {
     public ResponseEntity login(@RequestBody UserLoginRequest request) {
         try {
             UserLoginResponseDTO loginResponse = userService.login(request);
-            return new ResponseEntity(loginResponse, HttpStatus.OK);
+            return new ResponseEntity<>(loginResponse, HttpStatus.OK);
         } catch (Exception exception) {
             return new ResponseEntity(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
     // logout
+    @PostMapping(value = "/logout")
+    public ResponseEntity logout(@RequestBody UserLogoutRequestDTO request) {
+        try {
+            // validate session
+            userService.logout(request);
+            return new ResponseEntity<>("Session Logged out", HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

@@ -35,8 +35,9 @@ public class ProductController {
      * @param productCreateRequest
      * @return
      */
-    @PostMapping
-    public ResponseEntity create(@RequestHeader("Cookie") String cookieHeader,
+    // Cookie = "sessionID=xyz""
+    @PostMapping(value = "/create")
+    public ResponseEntity create(@RequestHeader("sessionId") String cookieHeader,
                               @RequestBody ProductCreateRequest productCreateRequest) {
         try {
             User user = sessionManagementService.getUserBySessionId(cookieHeader);

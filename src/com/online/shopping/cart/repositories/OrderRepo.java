@@ -2,6 +2,7 @@ package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.enums.OrderStatus;
 import com.online.shopping.cart.entity.Order;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 //TODO: Add validator layer
+@Component
 public class OrderRepo implements IOrderRepo{
     private static final List<Order> orders = new ArrayList<>();
 

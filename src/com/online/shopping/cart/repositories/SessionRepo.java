@@ -2,12 +2,14 @@ package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.SessionData;
 import com.online.shopping.cart.entity.User;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Component
 public class SessionRepo {
     private final static Map<String, SessionData> activeSessions = new HashMap<>();
 

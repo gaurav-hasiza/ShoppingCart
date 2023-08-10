@@ -1,12 +1,14 @@
 package com.online.shopping.cart.repositories;
 
 import com.online.shopping.cart.entity.CartItem;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class ShoppingCartRepo {
     private static final Map<String, List<CartItem>> cartItemsByUserId = new HashMap<>();
 

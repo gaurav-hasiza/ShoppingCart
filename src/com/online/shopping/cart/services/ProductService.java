@@ -9,9 +9,11 @@ import com.online.shopping.cart.entity.Product;
 import com.online.shopping.cart.mappers.ProductMapper;
 import com.online.shopping.cart.repositories.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public
 class ProductService {
 
