@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -21,15 +22,12 @@ public class SessionManagementService {
         String sessionId = sessionRepo.createSession(user, expirationTime);
         return sessionId;
     }
-//
-//    public void validate(SessionData session) {
-//        if (SessionStatus.LOGOUT.equals(session.getStatus())) {
-//            throw new CartServiceException(ErrorMessages.INVALID_SESSION_ID.getErrorMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//        if (session.getExpiryAt().isBefore(LocalDateTime.now())) {
-//            throw new CartServiceException(ErrorMessages.SESSION_EXPIRED.getErrorMessage(), HttpStatus.UNAUTHORIZED);
-//        }
-//    }
+
+    public void validateSession(SessionData session) {
+        if (session.getExpirationTime().isBefore(Instant.from(LocalDateTime.now()))) {
+            throw new RuntimeException("Session Not active");
+        }
+    }
 
     public void logout(String sessionId) {
         sessionRepo.removeSession(sessionId);
