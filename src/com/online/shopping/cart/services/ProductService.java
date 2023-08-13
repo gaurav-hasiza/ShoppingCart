@@ -16,11 +16,7 @@ import java.util.List;
 @Service
 public
 class ProductService {
-
     private final ProductRepo productRepo;
-//    private final UserEntityDetail userEntityDetail;
-//    private final ProductEntityDetail productEntityDetail;
-
     @Autowired
     public ProductService(ProductRepo productRepo) {
         this.productRepo = productRepo;

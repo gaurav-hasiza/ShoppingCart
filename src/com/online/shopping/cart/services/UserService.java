@@ -38,7 +38,8 @@ public class UserService {
         // call session controller to set the session`
         User user = userRepository.findById(request.getId());
         String sessionId = null;
-        if (user.getPassword().equals(request.getPassword())){
+        if (user.getPassword().equals(request.getPassword()) &&
+                user.getAccountStatus() != AccountStatus.SUSPENDED){
             sessionId = sessionManagementService.createSession(user);
         }
 

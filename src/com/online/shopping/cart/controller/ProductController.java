@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final SessionManagementService sessionManagementService;
-
     private final ProductService productService;
 
     @Autowired
@@ -80,13 +79,11 @@ public class ProductController {
      * @param cookieHeader
      * @return
      */
-    @GetMapping
-    public ResponseEntity listProduct(@RequestHeader("Cookie") String cookieHeader) {
+    @GetMapping(value = "/list")
+    public ResponseEntity listProduct(@RequestHeader("sessionId") String cookieHeader) {
         try {
             User user = sessionManagementService.getUserBySessionId(cookieHeader);
-            if (!user.getUserRole().equals(UserRole.ADMIN)){
-                throw new Exception("Invalid Role");
-            }
+
             ProductListResponseDTO response = productService.listProduct();
             return new ResponseEntity(response, HttpStatus.OK);
         } catch (Exception exception) {

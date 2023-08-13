@@ -2,28 +2,28 @@ package com.online.shopping.cart.controller;
 
 import com.online.shopping.cart.dtos.request.UserCreateRequestDTO;
 import com.online.shopping.cart.dtos.request.UserLoginRequest;
-import com.online.shopping.cart.dtos.request.UserLogoutRequestDTO;
 import com.online.shopping.cart.dtos.response.UserCreateResponseDTO;
 import com.online.shopping.cart.dtos.response.UserLoginResponseDTO;
 import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.mappers.UserMapper;
+import com.online.shopping.cart.services.SessionManagementService;
 import com.online.shopping.cart.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v0/users")
 public class UsersController {
-    @Autowired
     private final UserService userService;
 
-    public UsersController(UserService userService) {
+    private final SessionManagementService sessionManagementService;
+
+    @Autowired
+    public UsersController(UserService userService, SessionManagementService sessionManagementService) {
         this.userService = userService;
+        this.sessionManagementService = sessionManagementService;
     }
 
     @PostMapping("/createUser")
@@ -54,10 +54,10 @@ public class UsersController {
     }
     // logout
     @PostMapping(value = "/logout")
-    public ResponseEntity logout(@RequestBody UserLogoutRequestDTO request) {
+    public ResponseEntity logout(@RequestHeader("sessionId") String cookieHeader) {
         try {
             // validate session
-            userService.logout(request);
+            sessionManagementService.logout(cookieHeader);
             return new ResponseEntity<>("Session Logged out", HttpStatus.OK);
         } catch (Exception exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

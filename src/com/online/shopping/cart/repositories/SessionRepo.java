@@ -15,7 +15,6 @@ public class SessionRepo {
 
     public String createSession(User user, Instant expirationTime) {
         String sessionId = generateSessionId();
-//        Instant expirationTime = Instant.now().plusMillis(SESSION_TIMEOUT_MS);
         SessionData sessionData = new SessionData(user, expirationTime);
         activeSessions.put(sessionId, sessionData);
         return sessionId;

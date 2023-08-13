@@ -25,7 +25,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/{userID}/suspend")
-    public ResponseEntity<String> suspendUser(@RequestHeader("Cookie") String cookieHeader,
+    public ResponseEntity<String> suspendUser(@RequestHeader("sessionId") String cookieHeader,
                                               @PathVariable String userID) {
         User currUser = sessionService.getUserBySessionId(cookieHeader);
         if (currUser == null) {

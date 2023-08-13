@@ -24,7 +24,7 @@ public class ShoppingCartController {
      * @return
      */
     @PostMapping(value = "/addToCart")
-    public ResponseEntity addProductToCart(@RequestHeader("Cookie") String cookieHeader,
+    public ResponseEntity addProductToCart(@RequestHeader("sessionId") String cookieHeader,
                                      @RequestBody ShoppingCartAddToCartRequest shoppingCartAddToCartRequest) {
         try {
             User currentUser = sessionManagementService.getUserBySessionId(cookieHeader);
@@ -43,10 +43,9 @@ public class ShoppingCartController {
      * @return
      */
     @PostMapping(value = "/removeFromCart")
-    public ResponseEntity removeProduct(@RequestHeader("Cookie") String cookieHeader,
+    public ResponseEntity removeProduct(@RequestHeader("sessionId") String cookieHeader,
                                         @RequestBody ShoppingCartRemoveFromCartRequest shoppingCartRemoveFromCartRequest) {
         try {
-            sessionManagementService.validateSession(cookieHeader);
             User currentUser = sessionManagementService.getUserBySessionId(cookieHeader);
             CartItem cartItem = ShoppingCartMapper.mapToCartItem(shoppingCartRemoveFromCartRequest);
             shoppingCartService.removeFromCart(currentUser.getId(), cartItem);

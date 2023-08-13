@@ -7,6 +7,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public class ShoppingCartAddToCartRequest {
-    private final String productVariationId;
+    private final String productId;
     private final int quantity;
 }

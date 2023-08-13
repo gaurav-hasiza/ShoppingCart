@@ -8,12 +8,12 @@ public
 class ShoppingCartMapper {
 //    String ProductVariationId,
     public static CartItem mapToCartItem(ShoppingCartAddToCartRequest shoppingCartAddToCartRequest){
-        return CartItem.builder().productVariationId(shoppingCartAddToCartRequest.getProductVariationId())
+        return CartItem.builder().productId(shoppingCartAddToCartRequest.getProductId())
                 .quantity(shoppingCartAddToCartRequest.getQuantity()).build();
     }
 
     public static CartItem mapToCartItem(ShoppingCartRemoveFromCartRequest shoppingCartRemoveFromCartRequest){
-        return CartItem.builder().productVariationId(shoppingCartRemoveFromCartRequest.getProductVariationId())
+        return CartItem.builder().productId(shoppingCartRemoveFromCartRequest.getProductId())
                 .quantity(shoppingCartRemoveFromCartRequest.getQuantity()).build();
     }
 }
