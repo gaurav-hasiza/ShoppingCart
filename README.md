@@ -103,10 +103,25 @@ curl --location 'localhost:8080/v0/products/list' \
     ]
 }
 ```
+## Add to Cart
+### Request 
+```agsl
+curl --location 'localhost:8080/v0/shopping/addToCart' \
+--header 'sessionId: 392e170b-2a23-43e1-807b-22ef5b982cea' \
+--header 'Content-Type: application/json' \
+--data '{
+    "productId": "231c0f6d-a6e9-44e0-a3d1-e631df9e4b19",
+    "quantity": 1
+}'
+```
+### Response
+```agsl
+Status Ok
+```
 
 ## Cart List
 ### Request
-```
+```agsl
 curl --location 'localhost:8080/v0/shopping/getCart' \
 --header 'sessionId: 392e170b-2a23-43e1-807b-22ef5b982cea'
 ```
