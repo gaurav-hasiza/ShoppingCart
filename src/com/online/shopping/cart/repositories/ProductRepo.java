@@ -33,6 +33,10 @@ public class ProductRepo implements IProductRepo {
         return products.get(productId);
     }
 
+    public boolean isProductValid(String productId){
+        return products.containsKey(productId);
+    }
+
     public Product getProductByName(String productName) {
         for(Product product: products.values()){
             if (product.getName().equals(productName)){

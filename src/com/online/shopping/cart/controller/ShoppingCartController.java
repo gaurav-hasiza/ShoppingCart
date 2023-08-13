@@ -7,16 +7,34 @@ import com.online.shopping.cart.entity.User;
 import com.online.shopping.cart.mappers.ShoppingCartMapper;
 import com.online.shopping.cart.services.SessionManagementService;
 import com.online.shopping.cart.services.ShoppingCartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v0/shopping")
 public class ShoppingCartController {
 
-    ShoppingCartService shoppingCartService;
-    SessionManagementService sessionManagementService;
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+    @Autowired
+    private SessionManagementService sessionManagementService;
+
+    @GetMapping(value = "/getCart")
+    public ResponseEntity getCart(@RequestHeader("sessionId") String cookieHeader) {
+        try {
+            User currentUser = sessionManagementService.getUserBySessionId(cookieHeader);
+            List<CartItem> cartItemList = shoppingCartService.getCartItemsForUser(currentUser.getId());
+            return new ResponseEntity(cartItemList, HttpStatus.OK);
+        } catch (RuntimeException ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
     /**
      * Add the given product id to the cart
      * @param cookieHeader

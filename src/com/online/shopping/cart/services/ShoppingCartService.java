@@ -1,16 +1,22 @@
 package com.online.shopping.cart.services;
 
 import com.online.shopping.cart.entity.CartItem;
+import com.online.shopping.cart.repositories.ProductRepo;
 import com.online.shopping.cart.repositories.ShoppingCartRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ShoppingCartService {
+
+    private ProductRepo productRepo;
     private ShoppingCartRepo shoppingCartRepository;
 
-    public ShoppingCartService(ShoppingCartRepo shoppingCartRepository) {
+    @Autowired
+    public ShoppingCartService(ProductRepo productRepo, ShoppingCartRepo shoppingCartRepository) {
+        this.productRepo = productRepo;
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
@@ -19,8 +25,10 @@ public class ShoppingCartService {
     }
 
     public void addToCart(String userId, CartItem cartItem) {
-        // add validation if that variation item is already present or not
-        shoppingCartRepository.addToCart(userId, cartItem);
+        if (productRepo.isProductValid(cartItem.getProductId())) {
+            shoppingCartRepository.addToCart(userId, cartItem);
+        }
+        throw new RuntimeException("Product Id invalid");
     }
 
     public void removeFromCart(String userId, CartItem cartItem) {
