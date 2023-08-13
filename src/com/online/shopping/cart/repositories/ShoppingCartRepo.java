@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Component
 public class ShoppingCartRepo {
-    private static final Map<String, List<CartItem>> cartItemsByUserId = new HashMap<>();
+    protected static Map<String, List<CartItem>> cartItemsByUserId = new HashMap<>();
 
     public List<CartItem> getCartItemsForUser(String userId) {
         return cartItemsByUserId.getOrDefault(userId, new ArrayList<>());
