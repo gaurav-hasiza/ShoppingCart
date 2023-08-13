@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ShoppingCartService {
+public class ShoppingCartService implements IShoppingCartService {
 
     private ProductRepo productRepo;
     private ShoppingCartRepo shoppingCartRepository;

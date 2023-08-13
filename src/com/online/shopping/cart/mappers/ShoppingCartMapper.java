@@ -14,6 +14,6 @@ class ShoppingCartMapper {
 
     public static CartItem mapToCartItem(ShoppingCartRemoveFromCartRequest shoppingCartRemoveFromCartRequest){
         return CartItem.builder().productId(shoppingCartRemoveFromCartRequest.getProductId())
-                .quantity(shoppingCartRemoveFromCartRequest.getQuantity()).build();
+                .build();
     }
 }

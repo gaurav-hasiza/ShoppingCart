@@ -24,8 +24,9 @@ public class ShoppingCartRepo {
 
     public void removeFromCart(String userId, CartItem cartItem) {
         List<CartItem> cartItems = cartItemsByUserId.getOrDefault(userId, new ArrayList<>());
+
         cartItems.remove(cartItem);
-        cartItemsByUserId.put(userId, cartItems);
+        cartItemsByUserId.remove(userId);
     }
 
     public void clearCart(String userId) {

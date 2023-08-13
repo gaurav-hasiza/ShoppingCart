@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public
 class ShoppingCartRemoveFromCartRequest {
     private final String productId;
-    private final int quantity;
+//    private final int quantity;
 }
