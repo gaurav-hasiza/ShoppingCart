@@ -1,3 +1,27 @@
+## Requirements
+```agsl
+Q. Build a Shopping cart API with following functionalities:
+- Ability to create account with two roles (admin, user) and log in
+- Admin should be able to
+- Add items
+- Suspend user
+- User should be able to
+- List available items
+- Add items to a cart (if there are items in stock)
+- Remove items from their cart
+- Restrict the access to APIs through RBAC mechanism
+- Add unit test with extensive cases wherever possible (Bonus: E2E tests)
+- Follow proper coding conventions and add documentation & code comments wherever necessary
+- Create Readme for easy setup and testing of the API
+  Note: Candidates may use any coding language, though Golang would be preferable
+```
+## Setup Information:
+```
+java-19
+Junit version 5 
+.. TO ADD
+```
+## API Request Response 
 ## Create User
 ### Request
 ```agsl
